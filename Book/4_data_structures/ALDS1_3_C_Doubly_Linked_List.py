@@ -4,52 +4,67 @@ class Node:
         self.prev = None
         self.next = None
 
+
 class DoublyLinkedList:
     def __init__(self):
-        self.head = Node(None)
-        self.tail = Node(None)
-        self.head.next = self.tail
-        self.tail.prev = self.head
+        self.head = None
+        self.tail = None
 
     def insert(self, x):
-        cur_head = self.head.next
-        new_head = Node(x)
-        new_head.next = cur_head
-        new_head.prev = self.head
-        self.head.next = new_head
-        cur_head.prev = new_head
+        new_node = Node(x)
+        if self.head == None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
 
     def delete(self, x):
         cur = self.head
-        while True:
-            pre = cur
-            cur = cur.next
+        while cur:
             #print("key", cur.key)
-            #print("head", self.head.key)
             if cur.key == x:
-                pre.next = cur.next
-                cur.next.prev = pre
+                if cur.prev == None and cur.next == None:
+                    self.head = None
+                    self.tail = None
+                else:
+                    if cur == self.head:
+                        self.head = self.head.next
+                    else:
+                        cur.prev.next = cur.next
+                    if cur == self.tail:
+                        self.tail = self.tail.prev
+                        self.tail.next = None
+                    else:
+                        cur.next.prev = cur.prev
                 break
-            elif cur.key == None:
-                break    
+            cur = cur.next
 
     def deleteFirst(self):
-        del_node = self.head.next
-        self.head.next = del_node.next
-        del_node.next.prev = self.head
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next
+            self.head.prev = None
 
     def deleteLast(self):
-        del_node = self.tail.prev
-        #print("key", del_node.key)
-        self.tail.prev = del_node.prev
-        del_node.prev.next = self.tail
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
 
     def printList(self):
         ans = []
-        cur = self.head.next
-        while cur != self.tail:
-            ans.append(cur.key)
-            cur = cur.next
+        cur = self.head
+        if cur != None:
+            #print("head",self.head.key," tail",self.tail.key)
+            while cur:
+                ans.append(cur.key)
+                cur = cur.next
         print(*ans)
 
 
@@ -71,11 +86,3 @@ for i in range(n):
             l.deleteLast()
     #l.printList()
 l.printList()
-
-
-
-
-
-        
-
-
