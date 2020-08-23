@@ -1,3 +1,5 @@
+from sys import stdin
+
 class Node:
     def __init__(self, key):
         self.key = key
@@ -72,17 +74,15 @@ l = DoublyLinkedList()
 n = int(input())
 #print("---")
 for i in range(n):
-    cmd = input()
-    if cmd[7].isdigit():
-        target_num = int(cmd[7:])
-        if cmd[0] == 'i':
-            l.insert(target_num)
-        elif cmd[0] == 'd':
-            l.delete(target_num)
+    cmd = stdin.readline()
+    if cmd[0] == 'i':
+        l.insert(int(cmd[7:]))
     else:
         if cmd[6] == 'F':
             l.deleteFirst()
         elif cmd[6] == 'L':
             l.deleteLast()
+        else:
+            l.delete(int(cmd[7:]))
     #l.printList()
 l.printList()
