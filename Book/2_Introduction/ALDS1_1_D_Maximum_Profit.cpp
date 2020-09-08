@@ -5,7 +5,7 @@ static const int MAX = 200000;
 
 int main(){
     int lst[MAX], n, i;
-    int max_profit = -100000000;
+    int max_profit = -1486618624;
     cin >> n;
     for (int i = 0; i < n; i++){
         cin >> lst[i];
