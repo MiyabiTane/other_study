@@ -2,10 +2,11 @@
 // $ ./out
 #include <iostream>
 #include <math.h>
+#include "8_getBmi.h"
 using namespace std;
 
 // プロトタイプ宣言
-double getBmi_func(double height, double weight);
+//double getBmi_func(double height, double weight);
 
 int main () {
     double height;
