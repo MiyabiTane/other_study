@@ -17,6 +17,16 @@ string HealthChecker::getName() {
     return this->name;
 }
 
+int HealthChecker::getStdBmi() {
+    return HealthChecker::STD_BMI;
+}
+
+// 標準体重を返すメンバ関数の実装
+double HealthChecker::getStdWeight() {
+    double m_height = this->height / 100;
+    return HealthChecker::STD_BMI * m_height * m_height;
+}
+
 // コンストラクタの実装
 HealthChecker::HealthChecker(string name, double height, double weight) {
     // init

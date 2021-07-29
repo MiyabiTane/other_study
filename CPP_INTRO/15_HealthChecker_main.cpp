@@ -4,6 +4,8 @@
 using namespace std;
 #include "15_HealthChecker.h"
 
+const int HealthChecker::STD_BMI = 22;  // global
+
 int main() {
     const int DATA_NUM = 3;
     HealthChecker people[DATA_NUM] = {
@@ -18,8 +20,11 @@ int main() {
         {"鈴木二郎", 180, 85.5, 0}
     };
     */
+   cout << "標準BMIは" << HealthChecker::getStdBmi() << "です。" << endl;
+
    for (int i = 0; i < DATA_NUM; i++) {
-       cout << people[i].getName() << "さんのBMIは" << people[i].getBmi() << "です。" << endl;
+       cout << people[i].getName() << "さんのBMIは" << people[i].getBmi() << "で、"
+       << "標準体重は" << people[i].getStdWeight() << "です。" << endl;
    }
    return 0;
 }
