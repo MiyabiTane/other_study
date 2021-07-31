@@ -1,32 +1,53 @@
-# docker build -t ros2:dashing .
-FROM ubuntu:18.04
-ENV DEBIAN_FRONTEND noninteractive
 
-ENV ROS_DISTRO dashing
+# This is an auto generated Dockerfile for ros:ros-base
+# generated from docker_images_ros2/create_ros_image.Dockerfile.em
+FROM ros:foxy-ros-core-focal
 
-# ロケールのセットアップ
-RUN apt-get update && apt-get install -y locales && \
-    dpkg-reconfigure locales && \
-    locale-gen ja_JP ja_JP.UTF-8 && \
-    update-locale LC_ALL=ja_JP.UTF-8 LANG=ja_JP.UTF-8
-ENV LC_ALL   ja_JP.UTF-8
-ENV LANG     ja_JP.UTF-8
-ENV LANGUAGE ja_JP.UTF-8
+# install bootstrap tools
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    build-essential \
+    git \
+    python3-colcon-common-extensions \
+    python3-colcon-mixin \
+    python3-rosdep \
+    python3-vcstool \
+    && rm -rf /var/lib/apt/lists/*
 
-# APTソースリストの設定
-RUN apt-get update && \
-    apt-get install -y curl gnupg2 lsb-release && \
-    curl http://repo.ros2.org/repos.key | apt-key add - && \
-    sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu \
-    `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list' && \
-    apt-get update
+# bootstrap rosdep
+RUN rosdep init && \
+  rosdep update --rosdistro $ROS_DISTRO
 
-# ROS2パッケージのインストール
-RUN export ROS_DISTRO=dashing && \
-    apt-get install -y ros-$ROS_DISTRO-desktop \
-    python3-colcon-common-extensions python3-rosdep python3-argcomplete && \
-    rosdep init && \
-    rosdep update
+# setup colcon mixin and metadata
+RUN colcon mixin add default \
+      https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml && \
+    colcon mixin update && \
+    colcon metadata add default \
+      https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml && \
+    colcon metadata update
 
-## 環境設定
-RUN    echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+# install ros2 packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-foxy-ros-base=0.9.2-1* \
+    && rm -rf /var/lib/apt/lists/*
+
+# Get ROS2 code
+# https://docs.ros.org/en/foxy/Installation/Ubuntu-Development-Setup.html
+RUN sudo apt-get update && apt-get install -y wget
+RUN mkdir -p ~/ros2_foxy/src
+WORKDIR /root/ros2_foxy
+RUN wget https://raw.githubusercontent.com/ros2/ros2/foxy/ros2.repos
+RUN sudo vcs import /root/ros2_foxy/src < ros2.repos
+
+RUN rosdep update
+RUN rosdep install --from-paths /root/ros2_foxy/src --ignore-src --rosdistro foxy -y --skip-keys "console_bridge fastcdr fastrtps rti-connext-dds-5.3.1 urdfdom_headers"
+
+RUN colcon build --symlink-install
+
+RUN echo ". ~/ros2_foxy/install/local_setup.bash" >> ~/.bashrc 
+
+# to use colcon_cd
+RUN echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
+RUN echo "export _colcon_cd_root=~/ros2_install" >> ~/.bashrc
+
+# ローカルファイルのコピー
+# COPY test.bag /root/
