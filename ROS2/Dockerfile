@@ -51,3 +51,16 @@ RUN echo "export _colcon_cd_root=~/ros2_install" >> ~/.bashrc
 
 # ローカルファイルのコピー
 # COPY test.bag /root/
+COPY sub_image.py /root/ros2_foxy/sub_image.py
+COPY pub_image.py /root/ros2_foxy/pub_image.py
+
+# to use cv_bridge
+# https://github.com/ros-perception/vision_opencv/tree/ros2/cv_bridge
+# RUN sudo apt install python3-numpy
+RUN sudo apt install -y libboost-all-dev
+# RUN git clone https://github.com/ros-perception/vision_opencv.git/
+# WORKDIR /root/ros2_foxy/vision_opencv
+# RUN git checkout ros2
+# RUN colcon build --symlink-install
+
+# WORKDIR /root/ros2_foxy
