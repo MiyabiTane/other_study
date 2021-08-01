@@ -2,7 +2,8 @@ import rclpy
 from rclpy.node import Node
 
 from sensor_msgs.msg import Image
-# from cv_bridge import CvBridge
+from cv_bridge import CvBridge
+import cv2
 
 class ImageSubscriber(Node):
 
@@ -14,11 +15,11 @@ class ImageSubscriber(Node):
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
-        # self.bridge = CvBridge()
+        self.bridge = CvBridge()
 
     def listener_callback(self, msg):
-        # img = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
-        # cv2.imwrite("output.jpg", img)
+        img = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+        cv2.imwrite("output.jpg", img)
         self.get_logger().info('I heard: image of len: "%s"' % str(len(msg.data)))
 
 

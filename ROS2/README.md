@@ -56,9 +56,9 @@ topicのpublish例
 -> ros2 topic pub /topic_test example/msg/String '{data: hello}'
 ```
 
-画像データを取得するプログラム
+#### 画像データを取得するプログラム
 ```
-// まず、型の存在と中身を確認
+// 型の存在と中身の確認方法
 # ros2 pkg list | grep sensor
 # colcon_cd sensor_msgs
 # cd msg
@@ -71,12 +71,27 @@ $ docker run --rm -it ros2:foxy
 # python3 ./pub_image.py
 ```
 
-ターミナル2
+ターミナル2 [ToDo: Dockerfile内にビルド処理を書きたい...]
 ```
 $ docker run --rm -it ros2:foxy
+
+// cv_bridgeパッケージのビルド
+# rosdep install -i --from-path /root/ros2_foxy/src --rosdistro foxy -y
+(--More-- と表示されたら q -> yes)
+# colcon build --packages-select cv_bridge
+# . install/setup.bash
+
 # python3 ./sub_image.py
 ```
 
+ターミナル1（ターミナル2はexitしないこと！）
+```
+// 画像をローカルにコピー
+# exit
+$ docker ps -a
+// ここで表示されるros2:foxyのCONTAINER IDをコピーする（以下、[ROS_ID]）。
+$ docker cp [ROS ID]:/root/ros2_foxy/src/vision_opencv/output.jpg output.jpg
+```
 
 <!-- 参考記事
 https://qiita.com/porizou1/items/16ea8783f41fc5cac361
@@ -120,4 +135,8 @@ string encoding       # Encoding of pixels -- channel meaning, ordering, size
 uint8 is_bigendian    # is this data bigendian?
 uint32 step           # Full row length in bytes
 uint8[] data          # actual matrix data, size is (step * rows)
+-->
+
+<!--
+Dockerfileでyesを打たなくていいようにするには install -y と記述する
 -->

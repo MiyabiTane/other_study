@@ -49,18 +49,26 @@ RUN echo ". ~/ros2_foxy/install/local_setup.bash" >> ~/.bashrc
 RUN echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
 RUN echo "export _colcon_cd_root=~/ros2_install" >> ~/.bashrc
 
-# ローカルファイルのコピー
-# COPY test.bag /root/
-COPY sub_image.py /root/ros2_foxy/sub_image.py
-COPY pub_image.py /root/ros2_foxy/pub_image.py
-
 # to use cv_bridge
 # https://github.com/ros-perception/vision_opencv/tree/ros2/cv_bridge
-# RUN sudo apt install python3-numpy
+
+#pip3 install
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN sudo python3 get-pip.py
+RUN pip3 install -U pip
+
+RUN sudo apt install python3-numpy
 RUN sudo apt install -y libboost-all-dev
-# RUN git clone https://github.com/ros-perception/vision_opencv.git/
-# WORKDIR /root/ros2_foxy/vision_opencv
-# RUN git checkout ros2
+RUN pip3 install opencv-python
+
+WORKDIR /root/ros2_foxy/src
+RUN git clone https://github.com/ros-perception/vision_opencv.git/
+WORKDIR /root/ros2_foxy/src/vision_opencv
+RUN git checkout ros2
+
+WORKDIR /root/ros2_foxy/src/vision_opencv
 # RUN colcon build --symlink-install
 
-# WORKDIR /root/ros2_foxy
+# ローカルファイルのコピー
+COPY sub_image.py /root/ros2_foxy/src/vision_opencv/sub_image.py
+COPY pub_image.py /root/ros2_foxy/src/vision_opencv/pub_image.py
