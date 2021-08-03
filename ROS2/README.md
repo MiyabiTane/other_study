@@ -56,18 +56,20 @@ topicのpublish例
 -> ros2 topic pub /topic_test example/msg/String '{data: hello}'
 ```
 
-#### 画像データを取得するプログラム
+型の存在と中身の確認方法の例
 ```
-// 型の存在と中身の確認方法
 # ros2 pkg list | grep sensor
 # colcon_cd sensor_msgs
 # cd msg
 # cat cat Image.msg
 ```
 
+#### 画像データを取得するプログラム（Python）
+
 ターミナル1
 ```
 $ docker run --rm -it ros2:foxy
+# cd vision_opencv
 # python3 ./pub_image.py
 ```
 
@@ -76,6 +78,7 @@ $ docker run --rm -it ros2:foxy
 $ docker run --rm -it ros2:foxy
 
 // cv_bridgeパッケージのビルド
+# cd vision_opencv
 # rosdep install -i --from-path /root/ros2_foxy/src --rosdistro foxy -y
 (--More-- と表示されたら q -> yes)
 # colcon build --packages-select cv_bridge
@@ -91,6 +94,23 @@ $ docker run --rm -it ros2:foxy
 $ docker ps -a
 // ここで表示されるros2:foxyのCONTAINER IDをコピーする（以下、[ROS_ID]）。
 $ docker cp [ROS ID]:/root/ros2_foxy/src/vision_opencv/output.jpg output.jpg
+```
+
+#### 画像データを取得するプログラム（C++)
+ターミナル1
+```
+# colcon build --packages-select cpp_pubsub
+# . install/setup.bash
+
+# ros2 run cpp_pubsub talker
+```
+
+ターミナル2
+```
+# colcon build --packages-select cpp_pubsub
+# . install/setup.bash
+
+# ros2 run cpp_pubsub listener
 ```
 
 <!-- 参考記事
@@ -138,5 +158,7 @@ uint8[] data          # actual matrix data, size is (step * rows)
 -->
 
 <!--
-Dockerfileでyesを打たなくていいようにするには install -y と記述する
+Dockerfile関連
+・yesを打たなくていいようにするには install -y と記述する
+・https://answers.ros.org/question/319610/create-dockerfile-for-ros2-package-ament_cmake-error/
 -->

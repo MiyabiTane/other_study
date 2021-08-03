@@ -66,9 +66,17 @@ RUN git clone https://github.com/ros-perception/vision_opencv.git/
 WORKDIR /root/ros2_foxy/src/vision_opencv
 RUN git checkout ros2
 
-WORKDIR /root/ros2_foxy/src/vision_opencv
+# WORKDIR /root/ros2_foxy/src/vision_opencv
 # RUN colcon build --symlink-install
 
 # ローカルファイルのコピー
 COPY sub_image.py /root/ros2_foxy/src/vision_opencv/sub_image.py
 COPY pub_image.py /root/ros2_foxy/src/vision_opencv/pub_image.py
+
+# for cpp_pubsub
+WORKDIR /root/ros2_foxy/src
+# ros2 pkg create --build-type ament_cmake cpp_pubsubにほぼ等しい作業
+COPY cpp_pubsub /root/ros2_foxy/src/cpp_pubsub
+# RUN . ~/ros2_foxy/install/local_setup.bash
+# RUN colcon build --packages-select cpp_pubsub
+# . install/setup.bash
