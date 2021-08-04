@@ -100,6 +100,16 @@ $ docker cp [ROS ID]:/root/ros2_foxy/src/vision_opencv/output.jpg output.jpg
 ターミナル1
 ```
 $ docker run --rm -it ros2:foxy
+
+// cv_bridgeパッケージのビルド
+# cd vision_opencv
+# rosdep install -i --from-path /root/ros2_foxy/src --rosdistro foxy -y
+(--More-- と表示されたら q -> yes)
+# colcon build --packages-select cv_bridge
+# . install/setup.bash
+
+// 作成したパッケージのビルド
+# cd ../
 # colcon build --packages-select cpp_pubsub
 # . install/setup.bash
 
@@ -109,10 +119,29 @@ $ docker run --rm -it ros2:foxy
 ターミナル2
 ```
 $ docker run --rm -it ros2:foxy
+
+// cv_bridgeパッケージのビルド
+# cd vision_opencv
+# rosdep install -i --from-path /root/ros2_foxy/src --rosdistro foxy -y
+(--More-- と表示されたら q -> yes)
+# colcon build --packages-select cv_bridge
+# . install/setup.bash
+
+// 作成したパッケージのビルド
+# cd ../
 # colcon build --packages-select cpp_pubsub
 # . install/setup.bash
 
 # ros2 run cpp_pubsub listener
+```
+
+ターミナル1（ターミナル2はexitしないこと！）
+```
+// 画像をローカルにコピー
+# exit
+$ docker ps -a
+// ここで表示されるros2:foxyのCONTAINER IDをコピーする（以下、[ROS_ID]）。
+$ docker cp [ROS ID]:/root/ros2_foxy/src/output2.jpg output2.jpg
 ```
 
 <!-- 参考記事
