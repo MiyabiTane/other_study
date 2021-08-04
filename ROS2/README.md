@@ -99,6 +99,7 @@ $ docker cp [ROS ID]:/root/ros2_foxy/src/vision_opencv/output.jpg output.jpg
 #### 画像データを取得するプログラム（C++)
 ターミナル1
 ```
+$ docker run --rm -it ros2:foxy
 # colcon build --packages-select cpp_pubsub
 # . install/setup.bash
 
@@ -107,6 +108,7 @@ $ docker cp [ROS ID]:/root/ros2_foxy/src/vision_opencv/output.jpg output.jpg
 
 ターミナル2
 ```
+$ docker run --rm -it ros2:foxy
 # colcon build --packages-select cpp_pubsub
 # . install/setup.bash
 

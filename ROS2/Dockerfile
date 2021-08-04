@@ -80,3 +80,5 @@ COPY cpp_pubsub /root/ros2_foxy/src/cpp_pubsub
 # RUN . ~/ros2_foxy/install/local_setup.bash
 # RUN colcon build --packages-select cpp_pubsub
 # . install/setup.bash
+
+RUN sudo apt-get -y install vim
