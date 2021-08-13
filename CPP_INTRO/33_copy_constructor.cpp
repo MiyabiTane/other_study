@@ -33,5 +33,18 @@ int main() {
     cout << "obj1のメンバ関数のdataの値: " << obj1.getData() << endl;
     cout << "obj2のメンバ関数のdataの値: " << obj2.getData() << endl;
 
+    // 代入ではコピーコンストラクタが呼び出されないチェック
+    cout << endl;
+    MyClass obj3(123);
+    cout << "obj3のメンバ変数dataの値: " << obj3.getData() << endl;
+    cout << "----------------" << endl;
+
+    MyClass obj4(456);
+    cout << "obj4のメンバ変数dataの値（代入前）: " << obj4.getData() << endl;
+    cout << "-----------------" << endl;
+
+    obj4 = obj3;
+    cout << "obj4のメンバ変数dataの値（代入後）: " << obj4.getData() << endl;
+
     return 0;
 }
