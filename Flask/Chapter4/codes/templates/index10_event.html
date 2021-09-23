@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-3">
+    <mycomp />
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <div>
+        <div v-if="flg==false"
+            class="'h5 alert alert-light">
+            please input your message:
+        </div>
+        <div v-else
+            class="'h5 alert alert-primary">
+            {{alert}}
+        </div>
+        <div class="form-group">
+            <label for="msg">Message</label>
+            <div class="row">
+                <input type="text" class="form-control col"
+                id="msg" v-model="msg">
+                <button v-on:click="action" class="col-2">
+                    Click</button>
+        </div>
+    </div>
+</script>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+    data: function(){
+        return {
+            flg: false,
+            msg: '',
+            alert: 'please type message:'
+        };
+    },
+    methods:{
+        action: function(e) {
+            if (this.msg == '') {
+                this.alert = 'please type message:';
+                this.flg=false;
+            } else {
+                this.alert = 'you typed: ' + this.msg;
+                this.flg = true;
+            }
+        }
+    }
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-3">
+    <mycomp />
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <div>
+        <div v-if="msg == ''"
+            class="'h5 alert alert-light">
+            please input your message:
+        </div>
+        <div v-else
+            class="'h5 alert alert-primary">
+            you said: "{{ msg }}""
+        </div>
+        <div class="form-group">
+            <label for="msg">Message</label>
+            <!-- v-model="msg"とすることでリアルタイムでmsgが書き変わる -->
+            <input type="text" class="form-control"
+                id="msg" v-model="msg">
+        </div>
+    </div>
+</script>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+    data: function(){
+        return {
+            msg: ''
+        }
+    }
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

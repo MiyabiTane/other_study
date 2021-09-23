@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-5">
+    <mycomp name="Hanako"
+        msg="This is my first message."/>
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <div class="alert alert-primary">
+        <p class="h5">
+            Hi! I'm {{name}}.
+        </p>
+    </div>
+</script>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+    props: ['name', 'msg'],
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

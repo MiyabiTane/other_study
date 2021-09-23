@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+{% raw %}
+<div id="app" class="m-5">
+    <h2>{{ vue_msg }}</h2>
+</div>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        vue_msg: 'This is Vue.js!!'
+    }
+});
+</script>
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

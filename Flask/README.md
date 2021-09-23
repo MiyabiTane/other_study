@@ -25,3 +25,13 @@ Flaskで学ぶWebアプリケーションのしくみとつくり方(掌田津�
     http://localhost:5000/ にアクセスする
 
     Pipfileと同ディレクトリ下にコードを置いてしまうとexportできないので注意する。
+
+* Chapter4: Vue.js
+
+    実行の仕方の一例
+    ```
+    $ cd Chapter4
+    $ pipenv sync
+    $ pipenv run python app.py
+    ```
+    http://localhost:5000/ にアクセスする

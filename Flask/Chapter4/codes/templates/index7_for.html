@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-5">
+    <mycomp />
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <ul class="list-group">
+        <template v-for="item in data">
+            <li class="list-group-item">
+                {{item.name}}[ {{item.mail}}, {{item.age}} ]
+            </li>
+        </template>
+    </ul>
+</script>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+    props: ['name', 'msg', 'f'],
+    data: function(){
+        return {
+            data:[
+                {name:'Taro', mail:'taro@yamada', age:39},
+                {name:'Hanako', mail:'hanako@flower', age:28},
+                {name:'Sachiko', mail:'sachiko@happy', age:17}
+            ]
+        }
+    }
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

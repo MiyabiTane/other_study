@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-5">
+    <mycomp name="Hanako" f="true"
+        msg="This is my first message."/>
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <template v-if="flg=='true'">
+        <div class="alert-primary">
+            <p class="h5">
+                Hi! I'm {{name}}.
+            </p>
+            <p>{{ msg }}</p>
+        </div>
+    </template>
+    <template div v-else>
+        <div class="alert alert-danger">
+            <p class="h6">
+                I'm not {{name}}.
+            </p>
+        </div>
+    </template>
+</script>
+<!-- script type="text/x-template" id="mycomp-template">
+    <div v-if="flg=='true'" class="alert alert-primary">
+        <p class="h5">
+            Hi! I'm {{name}}.
+        </p>
+        <p>{{ msg }}</p>
+    </div>
+    <div v-else class="alert alert-danger">
+        <p class="h6">
+            I'm not {{name}}.
+        </p>
+    </div>
+</script -->
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+    props: ['name', 'msg', 'f'],
+    data: function(){
+        return {flg: this.f.toLowerCase()}
+    }
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

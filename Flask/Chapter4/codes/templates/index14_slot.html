@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-3">
+    {% raw %}
+    <mycomp>
+        <h5 slot="header">Hello!</h5>
+        <div slot="content">
+            <p>スロットサンプル</p>
+            <small>This is slot sample.</small>
+        </div>
+    </mycomp>
+    {% endraw %}
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <slot name="header" />
+            </div>
+            <div class="card-body">
+                <slot name="content" />
+            </div>
+        </div>
+    </div>
+</script>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}

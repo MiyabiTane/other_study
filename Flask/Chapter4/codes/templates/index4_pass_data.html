@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+<!-- content以外はテキスト -->
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block headline %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="mb-3" id="msg">{{ message }}</div>
+
+<!-- Vue.js container -->
+<div id="app" class="m-5">
+    <mycomp />
+</div>
+
+<!-- mycomp's template -->
+{% raw %}
+<script type="text/x-template" id="mycomp-template">
+    <div>
+        <p class="alert alert-primary h5">
+            Hello! This is My-Component!
+        </p>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-warning h5">
+                * data list *
+            </li>
+            <li v-for="item in data" class="list-group-item">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+</script>
+{% endraw %}
+
+<!-- Vue.js script -->
+<script>
+// data|tojson: python -> json
+// eval: 値をオブジェクトに変換
+var d = eval({{ data|tojson }});
+Vue.component('mycomp', {
+    template: '#mycomp-template',
+    data: function(){ return {data: d}; }
+});
+
+new Vue({
+    el:'#app',
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+copyright 2019 SYODA-Tuyano.
+{% endblock %}
