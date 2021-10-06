@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <link rel="stylesheet"
+          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <h1>Hello!</h1>
+    <p>
+        <script>
+            var price = 123500;
+            var tax0 = 0.08;
+            var tax1 = 0.1;
+            document.write("全額：" + price + "<br>");
+            document.write("軽減税率適用：" + price * (1.0 + tax0) + "円<br>");
+            document.write("通常の税率：" + price * (1.0 + tax1) + "円<br>");
+        </script>
+    </p>
+    <p>
+        <script>
+            var num = 12345;
+            if (num % 2 == 0) {
+                document.write(num + "は、偶数です<br>");
+            } else {
+                document.write(num + "は、奇数です<br>");
+            }
+        </script>
+    </p>
+    <p>
+        <script>
+            var jikan = 12;
+            // floor: 小数点以下切り捨て
+            var result = Math.floor(jikan / 6);
+            switch(result) {
+                case 0:
+                    document.write(jikan + "時は深夜です");
+                    break;
+                case 1:
+                    document.write(jikan + "時は朝です");
+                    break;
+                case 2:
+                    document.write(jikan + "時は昼です");
+                    break;
+                case 3:
+                    document.write(jikan + "時は夜です");
+                    break;
+                default:
+                    document.write(jikan + "時ですか？");
+            }
+        </script>
+    </p>
+    <p>
+        <script>
+            var N = 1103;
+            var num = 2;
+            var result = true;
+            for (var i = 2; i < N; i++) {
+                if (N % i == 0) {
+                    result = false;
+                    break;
+                }
+            }
+            /* while (num < N) {
+                if (N % num == 0) {
+                    result = false;
+                    break;
+                }
+                num++;
+            } */
+            if (result) {
+                document.write(N + "は素数です");
+            } else {
+                document.write(N + "は素数じゃないです");
+            }
+        </script>
+    </p>
+</body>
+</html>

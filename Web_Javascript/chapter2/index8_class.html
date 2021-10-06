@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <!-- p#next: id="next"の<p>のみに適応される -->
+    <!-- style>
+        body {margin: 0px 20px;}
+        h1 {font-size: 2.0em; color: red;}
+        p {font-size: 1.2em; color: darkblue;}
+        p#next {font-size: 1.5em; color: #aa00ff;}
+    </style -->
+    <!-- class: idを複数に割り当てたい -->
+    <style>
+        body {margin: 0px 20px;}
+        h1 {font-size: 2.0em; color: red;}
+        li {font-size: 1.2em; padding: 5px 10px; margin: 0px;}
+        li.A {color: blue; background-color: lightblue;}
+        li.B {color: lightblue; background-color: blue;}
+    </style>
+</head>
+<!-- body>
+    <h1>Hello!</h1>
+    <p>This is sample content.</p>
+    <p id="next">This is sample content.</p>
+    <p>This is sample content.</p>
+</body -->
+<body>
+    <h1>Hello!</h1>
+    <ul>
+        <li class="A">Windows</li>
+        <li class="B">macOS</li>
+        <li class="A">Linux</li>
+        <li class="B">ChromeOS</li>
+    </ul>
+</body>
+</html>

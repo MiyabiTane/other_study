@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <link rel="stylesheet"
+          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <h1>Hello!</h1>
+    <p>
+        <script>
+            var arr = [98, 76, 57, 69, 85];
+            var total = 0;
+            /* for (var i = 0; i < 5; i++) {
+                total += arr[i];
+            } */
+            for (var index in arr) {
+                // document.write(index);
+                total += arr[index];
+            }
+            document.write("合計は" + total + "平均は" + total / 5 + "です。");
+        </script>
+    </p>
+    <p>
+        <script>
+            var arr = {"国語":98, "数学":76, "英語":54, "理科":78, "社会":90};
+            var total = 0;
+            for (var key in arr) {
+                total += arr[key];
+                document.write(key + ": " + arr[key] + "点<br>");
+            }
+            document.write("<p>合計は" + total + "; 平均は" + total / 5 + "です</p>");
+        </script>
+    </p>
+    <p>
+        <script>
+            var keisan = {
+                data: [123, 45, 67, 89, 10],
+                calc: function() {
+                    var total = 0;
+                    for (var n in this.data) {
+                        total += this.data[n];
+                    }
+                    return total;
+                },
+                report: function() {
+                    document.write("Data: " + this.data + "<br>");
+                    document.write("total: " + this.calc());
+                }
+            }
+            keisan.report();
+        </script>
+        <!-- script>
+            var keisan = {};
+            keisan.data = [0];
+            keisan.calc = function() {
+                var total = 0;
+                for (var n in this.data) {
+                    total += this.data[n];
+                }
+                return total;
+            }
+            keisan.report = function() {
+                document.write("Data: " + this.data + "<br>");
+                document.write("total: " + this.calc());
+            }
+            keisan.data = [123, 45, 67, 89, 10];
+            keisan.report();
+        </script -->
+        <!-- script>
+            var keisan = {};
+            keisan['data'] = [0];
+            keisan['calc'] = function() {
+                var total = 0;
+                for (var n in keisan["data"]) {
+                    total += keisan["data"][n];
+                }
+                return total;
+            }
+            keisan["report"] = function() {
+                document.write("Data: " + keisan["data"] + "<br>");
+                document.write("total: " + keisan["calc"]());
+            }
+            keisan["data"] = [123, 45, 67, 89, 10];
+            keisan["report"]();
+        </script -->
+    </p>
+</body>
+</html>

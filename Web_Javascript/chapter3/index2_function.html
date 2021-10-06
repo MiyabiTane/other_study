@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <link rel="stylesheet"
+          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <h1>Hello!</h1>
+    <p>
+        <script>
+            function hello(name) {
+                document.write("Hello, " + name + "!<br>");
+            }
+            hello("Taro");
+            hello("Hanako");
+        </script>
+    </p>
+    <p>
+        <script>
+            function calc(n) {
+                var total = 0;
+                for (var i = 1; i <= n; i++) {
+                    total += i;
+                }
+                return total;
+            }
+            var num = 100;
+            document.write(num + "までの合計は" + calc(num) + "です");
+        </script>
+    </p>
+</body>
+</html>

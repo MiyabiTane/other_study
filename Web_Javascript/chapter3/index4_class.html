@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <link rel="stylesheet"
+          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <h1>Hello!</h1>
+    <p>
+        <script>
+            class Keisan {
+                constructor(data) {
+                    this.data = data;
+                }
+                calc() {
+                    var total = 0;
+                    for (var n in this.data) {
+                        total += this.data[n];
+                    }
+                    return total;
+                }
+                report() {
+                    document.write('<div class="alert alert-info">');
+                    document.write("データ: " + this.data + "<br>");
+                    document.write("合計: " + this.calc());
+                    document.write('</div>');
+                }
+            }
+            var keisan = new Keisan([12, 34, 56, 78, 89]);
+            keisan.report();
+            var keisan2 = new Keisan([12, 23, 34]);
+            keisan2.report();
+        </script>
+    </p>
+</body>
+</html>

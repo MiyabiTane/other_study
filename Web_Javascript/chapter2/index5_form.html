@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>　<!-- Webブラウザには表示されない -->
+    <meta charset="UTF-8">
+    <title>Hello!</title> <!-- ウィンドウのタイトルバー -->
+</head>
+<body>
+    <h1>Hello!</h1>
+    <form>
+        <div>
+            <input type="text" size="40">
+        </div>
+        <div> <!-- textarea：複数行 -->
+            <textarea cols="30" rows="3">default text.</textarea>
+        </div>
+        <div>
+            <input type="checkbox" id="ch">
+            <label for="ch">Checkbox</label>
+        </div>
+        <div> <!-- nameを等しくすることで同じグループとして機能する（１つしか選択できない）-->
+            <input type="radio" name="r" id="rl">
+            <label for="rl">Radio button</label><br>
+            <input type="radio" name="r" id="r2">
+            <label for="r2">Radio button B</label>
+        </div>
+        <div> <!-- 複数項目の選択が可能 -->
+            <select size="3" multiple>
+                <option>項目1</option>
+                <option>項目2</option>
+                <option>項目3</option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" value="Click">
+        </div>
+    </form>
+</body>
+</html>
