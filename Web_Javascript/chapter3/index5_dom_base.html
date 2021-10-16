@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <link rel="stylesheet"
+          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <p id="msg">wait...</p>
+    <script>
+        // #<id_name>で指定
+        var p = document.querySelector('#msg');
+        setTimeout(function() {  // 一定時間が経過したら処理を実行
+            p.textContent = "DOM操作";
+        }, 3000);
+    </script>
+
+    <p onclick="action(event)">click me!</p>
+    <script>
+        var counter = 0;
+        function action(event) {
+            counter++;
+            // target: イベントが発生した要素のDOMオブジェクトが保管されている
+            var dom = event.target;
+            dom.textContent = 'Count: ' + counter;
+        }
+    </script>
+
+    <p id="msg">フォームを入力：</p>
+    <div class="form-group">
+        <label for="f1">Name</label>
+        <input type="text" id="f1" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="f2">Password</label>
+        <input type="password" id="f2" class="form-control">
+    </div>
+    <div class="form-group">
+        <button onclick="action(event)" class="btn btn-primary">
+            Click!
+        </button>
+    </div>
+    <script>
+        function action(event) {
+            var f1 = document.querySelector('#f1');
+            var f2 = document.querySelector('#f2');
+            var result = "Your name: " + f1.value + '<br>'
+                         + 'Password:(' + f2.value.length + 'chars)';
+            var msg = document.querySelector('#msg');
+            // innerHTML: textではなくhtmlのコードとして送信
+            msg.innerHTML = result; 
+        }
+    </script>
+</body>
+</html>

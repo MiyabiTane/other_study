@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <link rel="stylesheet"
+          href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+</head>
+<body class="container">
+    <h1>Hello!</h1>
+    <p id="msg" class="h4" onclick="action(event)">type item</p>
+    <div class="form-group">
+        <label for="f1">Item:</label>
+        <input type="text" id="f1" class="form-control">
+    </div>
+    <div class="form-group">
+        <button onclick="action(event)" class="btn btn-primary">
+            Click
+        </button>
+    </div>
+    <h6>List</h6>
+    <ul id="list" class="list-group"></ul>
+    <script>
+        function action(event) {
+            var f1 = document.querySelector('#f1');
+            var list = document.querySelector('#list');
+            var msg = document.querySelector('#msg');
+            if (f1.value == '') {
+                var item = list.children[0].remove();
+            } else {
+                var li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.textContent = f1.value;
+                // クリックした時にclickItem関数が呼ばれる
+                li.addEventListener("click", clickItem);
+                list.append(li);
+                msg.textContent = '[' + f1.value + ']を追加しました';
+                f1.value = '';
+            }
+        }
+        function clickItem(event) {
+            var item = event.target; //イベントが発生したエレメントの取り出し
+            var items = item.parentNode.childNodes; //全<li>エレメントの取り出し
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove('active');
+            }
+            item.classList.add('active');
+            var msg = document.querySelector('#msg');
+            msg.textContent = "selected: " + item.textContent;
+        }
+    </script>
+    <!-- script>
+        function action(event) {
+            var f1 = document.querySelector('#f1');
+            var list = document.querySelector('#list');
+            var msg = document.querySelector('#msg');
+            if (f1.value == ''){
+                var item = list.children[0].remove();
+            } else {
+                var li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.textContent = f1.value;
+                list.appendChild(li);
+                msg.textContent = '[' + f1.value + ']を追加しました';
+                f1.value = '';
+            }
+        }
+    </script -->
+</body>
+</html>
