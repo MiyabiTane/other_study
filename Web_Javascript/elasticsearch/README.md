@@ -14,7 +14,8 @@ Dockerコンテナの起動
 ```
 $ docker-compose up -d
 ```
-http://localhost:9200にアクセスするとes01コンテナに接続でき、そこを介してes02にアクセスできるという仕組み
+http://localhost:9200
+にアクセスするとes01コンテナに接続でき、そこを介してes02にアクセスできるという仕組み
 
 Dockerコンテナの停止
 ```
