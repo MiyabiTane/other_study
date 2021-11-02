@@ -1,0 +1,14 @@
+#!/usr/bin/env expect
+
+set timeout -1
+spawn sudo aptitude install npm
+expect {
+    "Accept this solution? \\\[Y/n/q/?\\\]" { send ".\n";}
+}
+expect {
+    "Accept this solution? \\\[Y/n/q/?\\\]" { send "y\n";}
+}
+expect {
+    "Do you want to continue? \\\[Y/n/?\\\]" { send "y\n";}
+}
+expect eof
