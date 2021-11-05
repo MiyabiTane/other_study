@@ -16,6 +16,15 @@ Webプログラミング実践入門(掌田津耶乃[著])を使って勉強
     $ npm install
     $ npm start
     ```
+    http://localhost:3000/hello
+    にアクセス<br>
+
+    セッションを利用する場合
+    ```
+    $ cd [dir_name]
+    $ npm install --save express-session
+    ```
+
 
 ### elasticsearch
 
