@@ -32,7 +32,11 @@ def check_date(driver, ymd, park):
         for avairable in avairables:
             text = avairable.get_attribute('innerHTML')
             # ava_day = avairable.find_elements_by_class_name("day")
-            if '"day">' + str(ymd[6:8]) + '<' in text:
+            if ymd[6] == '0':
+                find_target = '"day">' + str(ymd[7:8]) + '<'
+            else:
+                find_target = '"day">' + str(ymd[6:8]) + '<'
+            if find_target in text:
                 print("=================")
                 print("== チケットに空きがあります ==")
                 print("=================")
